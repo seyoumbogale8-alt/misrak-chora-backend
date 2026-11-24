@@ -1,7 +1,14 @@
-﻿import re
+﻿import os
+import sys
+import re
 import traceback
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
+
 from icd11_kb import ICD11_KB
 from triage_engine import get_triage_response
 from conversation_manager import *
