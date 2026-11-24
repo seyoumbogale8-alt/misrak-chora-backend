@@ -12,6 +12,9 @@ const Color kBorderBlue = Color(0xFFD2E2F8);
 const Color kTextDark = Color(0xFF0B1F3A);
 const Color kTextMuted = Color(0xFF526983);
 
+const String kRenderBackendBaseUrl = 'https://misrak-chora-backend.onrender.com';
+const String kRenderAskEndpoint = '$kRenderBackendBaseUrl/api/ask';
+
 class ChatMessage {
   final String text;
   final bool isUser;
@@ -54,7 +57,7 @@ class _WebChatScreenState extends State<WebChatScreen> {
   int _activeSessionIndex = -1;
   bool _isLoading = false;
 
-  static const String _backendUrl = 'http://127.0.0.1:8000/api/ask';
+  static const String _backendUrl = kRenderAskEndpoint;
 
   List<ChatMessage> get _currentMessages {
     if (_activeSessionIndex < 0 || _activeSessionIndex >= _sessions.length) {
@@ -229,7 +232,7 @@ class _WebChatScreenState extends State<WebChatScreen> {
             headers: {'Content-Type': 'application/json'},
             body: jsonEncode({'question': text}),
           )
-          .timeout(const Duration(seconds: 25));
+          .timeout(const Duration(seconds: 60));
 
       if (response.statusCode == 200) {
         final decoded = jsonDecode(utf8.decode(response.bodyBytes));
@@ -249,8 +252,8 @@ class _WebChatScreenState extends State<WebChatScreen> {
       }
     } catch (_) {
       replyText =
-          'ከባክኤንድ ሰርቨር (http://127.0.0.1:8000) ጋር መገናኘት አልተቻለም። '
-          'እባክዎ Flask ሰርቨሩ መነሳቱን ያረጋግጡ።';
+          'ከባክኤንድ ሰርቨር ($kRenderBackendBaseUrl) ጋር መገናኘት አልተቻለም። '
+          'እባክዎ የ Render ሰርቨሩ መነሳቱን ወይም የኢንተርኔት ግንኙነትዎን ያረጋግጡ።';
     }
 
     if (!mounted) return;

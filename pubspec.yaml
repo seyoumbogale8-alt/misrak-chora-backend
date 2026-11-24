@@ -31,6 +31,22 @@ flutter:
     - assets/logo.jpg
     - assets/ICONE.png
     - assets/user.png
+    - assets/icd11_kb.json
+    - assets/lungs_healthy.png
+    - assets/lungs_diseased.png
+    - assets/liver_healthy.png
+    - assets/liver_diseased.png
+    - assets/kidney_healthy.png
+    - assets/kidney_diseased.png
+    - assets/cardiac-arrest.png
+    - assets/Brain Bleed.png
+    - assets/diabetes.png
+    - assets/Hypertension.png
+    - assets/fever & Infection.png
+    - assets/Smoking-Related Diseases.png
+    - assets/Alcohol-Related Diseases.png
+    - assets/STI.png
+    - assets/Resparatory.png
 
 flutter_launcher_icons:
   android: true

@@ -9,7 +9,7 @@ class AIService {
 
       final response = await http.post(
         Uri.parse(
-          "http://127.0.0.1:8000/api/ask",
+          "https://misrak-chora-backend.onrender.com/api/ask"
         ),
         headers: {
           "Content-Type":
