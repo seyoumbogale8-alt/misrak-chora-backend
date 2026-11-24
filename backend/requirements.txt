@@ -3,3 +3,5 @@ flask-cors
 requests==2.31.0
 gunicorn
 gunicorn
+
+flask-cors
