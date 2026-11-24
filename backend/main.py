@@ -1,6 +1,7 @@
-﻿import os
-import sys
+﻿import json
+import os
 import re
+import sys
 import traceback
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -9,7 +10,17 @@ ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if ROOT_DIR not in sys.path:
     sys.path.insert(0, ROOT_DIR)
 
-from icd11_kb import ICD11_KB
+try:
+    from icd11_kb import ICD11_KB
+except ModuleNotFoundError:
+    _kb_json_path = os.path.join(ROOT_DIR, "assets", "icd11_kb.json")
+    if os.path.exists(_kb_json_path):
+        with open(_kb_json_path, "r", encoding="utf-8") as _f:
+            _loaded_kb = json.load(_f)
+        ICD11_KB = _loaded_kb if isinstance(_loaded_kb, list) else []
+    else:
+        ICD11_KB = []
+
 from triage_engine import get_triage_response
 from conversation_manager import *
 
